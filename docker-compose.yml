@@ -1,0 +1,63 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:  
+  db:
+    container_name: pg_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test_db
+    ports:
+      - "5455:5432" #first port for local pgadmin configuaration and second port is for browser postgres configuration
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80" 
+  matcrmapi:
+    image: matcrmapi
+    build:
+      context: .
+      dockerfile: api-crm/matcrm.api/Dockerfile
+    ports:
+      - 5100:5100
+    depends_on:
+      - db  
+  # apiforms:
+  #   image: apiforms
+  #   build:
+  #     context: .
+  #     dockerfile: api-forms/api-forms.api/Dockerfile
+  #   ports:
+  #     - 5200:5200
+  #   depends_on:
+  #     - db     
+  # appcrm:
+  #   image: appcrm
+  #   build:
+  #     context: .
+  #     dockerfile: app-crm/Dockerfile
+  #   ports:
+  #     - 4100:80
+  # appmail:
+  #   image: appmail
+  #   build:
+  #     context: .
+  #     dockerfile: app-mail/Dockerfile
+  #   ports:
+  #     - 4200:80
+  # appforms:
+  #   image: appforms
+  #   build:
+  #     context: .
+  #     dockerfile: app-forms/Dockerfile
+  #   ports:
+  #     - 4300:80              
