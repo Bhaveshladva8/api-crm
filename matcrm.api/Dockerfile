@@ -6,10 +6,10 @@ ENV ASPNETCORE_URLS=http://+:5100
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["api-crm/matcrm.api/matcrm.api.csproj", "api-crm/matcrm.api/"]
-RUN dotnet restore "api-crm\matcrm.api\matcrm.api.csproj"
+COPY ["matcrm.api/matcrm.api.csproj", "matcrm.api/"]
+RUN dotnet restore "matcrm.api\matcrm.api.csproj"
 COPY . .
-WORKDIR "/src/api-crm/matcrm.api"
+WORKDIR "/src/matcrm.api"
 RUN dotnet build "matcrm.api.csproj" -c Release -o /app/build
 
 FROM build AS publish
