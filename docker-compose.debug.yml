@@ -7,7 +7,7 @@ services:
     image: matcrmapi
     build:
       context: .
-      dockerfile: api-crm/matcrm.api/Dockerfile
+      # dockerfile: api-crm/matcrm.api/Dockerfile
     ports:
       - 5100:5100
     environment:
