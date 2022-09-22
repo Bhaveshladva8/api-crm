@@ -133,7 +133,7 @@ PaymentNotificationLogic paymentNotificationLogic;
 IMapper mapper;
 string _env = "dev";
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("http://localhost:4000/");
+//builder.WebHost.UseUrls("http://localhost:4000/");
 Configuration = builder.Configuration;
 
 var config1 = new ConfigurationBuilder()
